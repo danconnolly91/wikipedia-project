@@ -1,0 +1,7 @@
+dropbox/
+data/
+.env
+__pycache__/
+*.parquet
+*.zst
+*.jsonl
