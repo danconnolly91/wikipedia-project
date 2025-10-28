@@ -48,7 +48,7 @@ def fetch_revisions(page_title: str, ua: str, start: str | None, end: str | None
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pages", nargs="+", required=True, help="One or more page titles")
+    ap.add_argument("--pagefile", required=True, help="Path to text file containing page titles (one per line)")
     ap.add_argument("--start", help="ISO timestamp, e.g. 2025-01-01T00:00:00Z")
     ap.add_argument("--end", help="ISO timestamp")
     ap.add_argument("--outdir", default="data/raw/revisions", help="Output directory (JSONL.GZ)")
@@ -59,7 +59,10 @@ def main():
     outdir = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    for page in args.pages:
+    with open(args.pagefile, 'r') as f:
+        pages = [line.strip() for line in f if line.strip()]
+    
+    for page in pages:
         safe = page.replace(" ", "_").replace("/", "_")
         outpath = outdir / f"{safe}.jsonl.gz"
         # append-only so you can re-run safely

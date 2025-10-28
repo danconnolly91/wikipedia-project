@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Convert a JSONL.GZ file (from fetch_revisions.py) into a Parquet file.
-Input:  data/raw/revisions/<title>.jsonl.gz
+Convert JSONL.GZ files (from fetch_revisions.py) into Parquet files.
+Takes the same pages.txt input file as fetch_revisions.py and converts all available
+JSONL.GZ files to Parquet format.
+
+Input:  data/raw/revisions/<title>.jsonl.gz (for each page in pages.txt)
 Output: data/cleaned/revisions/<title>.parquet
+
 Usage:
-  python scripts/to_parquet.py \
-    --infile data/raw/revisions/COVID-19_pandemic.jsonl.gz \
-    --outfile data/cleaned/revisions/COVID-19_pandemic.parquet
+  python scripts/to_parquet.py --pagefile data/input/pages.txt
 """
 import gzip, json, argparse
 from pathlib import Path
@@ -42,10 +44,27 @@ def convert_jsonl_to_parquet(infile: Path, outfile: Path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--infile", required=True)
-    ap.add_argument("--outfile", required=True)
+    ap.add_argument("--pagefile", required=True, help="Path to text file containing page titles (one per line)")
+    ap.add_argument("--indir", default="data/raw/revisions", help="Input directory containing JSONL.GZ files")
+    ap.add_argument("--outdir", default="data/cleaned/revisions", help="Output directory for Parquet files")
     args = ap.parse_args()
-    convert_jsonl_to_parquet(Path(args.infile), Path(args.outfile))
+
+    with open(args.pagefile, 'r') as f:
+        pages = [line.strip() for line in f if line.strip()]
+    
+    indir = Path(args.indir)
+    outdir = Path(args.outdir)
+    
+    for page in pages:
+        safe = page.replace(" ", "_").replace("/", "_")
+        infile = indir / f"{safe}.jsonl.gz"
+        outfile = outdir / f"{safe}.parquet"
+        
+        if not infile.exists():
+            print(f"Warning: Input file not found for page '{page}' at {infile}")
+            continue
+            
+        convert_jsonl_to_parquet(infile, outfile)
 
 if __name__ == "__main__":
     main()
