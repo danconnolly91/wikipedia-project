@@ -1,0 +1,15 @@
+{
+  "signed_correlation": -0.08962186496583081,
+  "absolute_correlation": -0.21670831473480917,
+  "regression": {
+    "params": {
+      "const": 7898.196795338854,
+      "abs_dist": -26.486234206810934
+    },
+    "pvalues": {
+      "const": 3.2694090359701195e-104,
+      "abs_dist": 4.9717200668171056e-17
+    },
+    "rsquared": 0.04696249367520122
+  }
+}

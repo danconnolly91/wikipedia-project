@@ -1,4 +1,4 @@
-#!/Users/dc0891/code/wikipedia-project/.venv/bin/python3.11
+#!/Users/lh6704/wikipedia-project/.venv/bin/python3.14
 import sys
 from charset_normalizer.cli import cli_detect
 if __name__ == '__main__':

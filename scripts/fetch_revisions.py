@@ -51,7 +51,7 @@ def main():
     ap.add_argument("--pagefile", required=True, help="Path to text file containing page titles (one per line)")
     ap.add_argument("--start", help="ISO timestamp, e.g. 2025-01-01T00:00:00Z")
     ap.add_argument("--end", help="ISO timestamp")
-    ap.add_argument("--outdir", default="data/raw/revisions", help="Output directory (JSONL.GZ)")
+    ap.add_argument("--outdir", default="data/revisions", help="Output directory (JSONL.GZ)")
     args = ap.parse_args()
 
     ua = os.getenv("WIKI_UA", "Connolly-WikiProject/0.1 (dan.connolly91@gmail.com)")

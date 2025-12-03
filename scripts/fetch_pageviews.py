@@ -1,10 +1,14 @@
 # scripts/fetch_pageviews.py
 import requests, pandas as pd, argparse
 from datetime import datetime
+from pathlib import Path
 
 def fetch_pageviews(article, start, end, project="en.wikipedia", access="all-access", agent="user", granularity="daily"):
     url = f"https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}"
-    r = requests.get(url)
+    headers = {
+        "User-Agent": "Connolly-WikiProject/0.1 (dan.connolly91@gmail.com)"
+    }
+    r = requests.get(url, headers=headers)
     r.raise_for_status()
     items = r.json()["items"]
     df = pd.DataFrame([{
@@ -23,4 +27,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     df = fetch_pageviews(args.article, args.start, args.end)
+    out_path = Path(args.outfile)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_parquet(args.outfile, index=False)

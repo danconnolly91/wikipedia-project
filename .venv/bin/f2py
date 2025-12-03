@@ -1,4 +1,4 @@
-#!/Users/dc0891/code/wikipedia-project/.venv/bin/python3.11
+#!/Users/lh6704/wikipedia-project/.venv/bin/python3.14
 import sys
 from numpy.f2py.f2py2e import main
 if __name__ == '__main__':
