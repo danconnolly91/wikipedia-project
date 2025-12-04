@@ -1,0 +1,28 @@
+Signed correlation: 0.0067
+Absolute correlation: -0.1798
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  views   R-squared:                       0.032
+Model:                            OLS   Adj. R-squared:                  0.032
+Method:                 Least Squares   F-statistic:                     127.2
+Date:                Thu, 04 Dec 2025   Prob (F-statistic):           4.90e-29
+Time:                        12:59:10   Log-Likelihood:                -39776.
+No. Observations:                3809   AIC:                         7.956e+04
+Df Residuals:                    3807   BIC:                         7.957e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const       7436.7183    272.900     27.251      0.000    6901.674    7971.763
+abs_dist     -28.7153      2.546    -11.277      0.000     -33.708     -23.723
+==============================================================================
+Omnibus:                     7272.305   Durbin-Watson:                   0.176
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         13588100.206
+Skew:                          14.635   Prob(JB):                         0.00
+Kurtosis:                     294.136   Cond. No.                         217.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
